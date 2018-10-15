@@ -34,4 +34,15 @@ class SecurityController extends AbstractController
             'error'         => $error,
         ));
     }
+
+    /**
+     * @Route("/admin/logout", name="admin/logout")
+     */
+    public function logout()
+    {
+
+        return $this->render('default/index.html.twig', array(
+            "controller_name" => "Default"
+        ));
+    }
 }
