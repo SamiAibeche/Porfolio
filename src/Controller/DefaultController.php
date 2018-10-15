@@ -24,6 +24,8 @@ class DefaultController extends AbstractController
      */
     public function admin()
     {
-        return new Response('<html><body>Admin page!</body></html>');
+        return $this->render('admin/default/index.html.twig', [
+            'controller_name' => 'AdminController',
+        ]);
     }
 }

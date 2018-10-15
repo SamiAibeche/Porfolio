@@ -14,6 +14,7 @@
         "symfony/security-bundle": "*",
         "symfony/security-csrf": "*",
         "symfony/twig-bundle": "*",
+        "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*"
     },
     "require-dev": {
