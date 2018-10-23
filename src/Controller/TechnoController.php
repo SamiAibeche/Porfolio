@@ -19,8 +19,12 @@ class TechnoController extends AbstractController
      */
     public function index()
     {
+        $repo = $this->getDoctrine()->getRepository(Techno::class);
+        $technos = $repo->findBy(array(), array('name' => 'ASC'));
+
         return $this->render('admin/techno/index.html.twig', [
             'controller_name' => 'TechnoController',
+            'technos' => $technos
         ]);
     }
 

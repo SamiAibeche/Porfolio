@@ -1,20 +1,78 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'admin/default/index.html.twig' %}
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block main %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="display-4" >Welcome to your Technology Manager</h1>
+                <p class="lead">
+                    Here you will be able to add, edit or delete a technology, please click on the needed button to apply the action
+                </p>
+                <a href="/admin/techno/add" class="link-btn col-md-2"><span data-feather="plus"></span>Add a Techno</a>
+            </div>
+            <div class="col-md-12 mt_150">
+                <table id="translationsTable" class="">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Background Color</th>
+                    <th width="30">Edit</th>
+                    <th width="30">Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                {%  for techno in technos  %}
+                    <tr>
+                        <td>{{  techno.id }}</td>
+                        <td>{{  techno.name }}</td>
+                        <td><span style="width:30px; height:30px; background-color: {{  techno.color }};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> {{  techno.color }}</td>
+                        <td><span style="width:30px; height:30px; background-color: {{  techno.background }};">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> {{  techno.background }} </td>
+                        <td style="display: flex" >
+                            <a style="color:white" class="btn btn-xs btn-warning" href="/admin/techno/edit/{{  techno.id }}"><span data-feather="edit-2"></span></a></td>
+                        </td>
+                        <td>
+                            <form style="display: inline" method="POST" action="/admin/techno/delete">
+                                <input type="hidden" name="action" value="">
+                                <input type="hidden" name="techno_id" value="11">
+                                <button class="btn btn-xs btn-danger"><span data-feather="trash-2"></span></button>
+                            </form>
+                        </td>
+                    </tr>
+                {%  endfor %}
+                </tbody>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block javascripts %}
+<link href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.2/select2.css" rel="stylesheet"/>
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet"/>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.js"></script>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller Admin at <code><a href="{{ 'src/Controller/TechnoController.php'|file_link(0) }}">src/Controller/TechnoController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/techno/index.html.twig'|file_link(0) }}">templates/techno/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <script>
+    // In your Javascript (external .js resource or <script> tag)
+    $(document).ready(function() {
+        $('#translationsTable').DataTable({
+            "bLengthChange": false,
+            "paging": true,
+            "pageLength": 30,
+            "bInfo" : false,
+            drawCallback: function() {
+                $('.dt-select2').select2();
+            }
+        });
+        $('#translationsTable_filter').css({"display":"none"});
+        var table = $('#translationsTable').DataTable();
+        // #myInput is a <input type="text"> element
+        $('#serchUserInput').on( 'keyup', function () {
+            table.search( this.value ).draw();
+        } );
+    });
+</script>
 {% endblock %}
