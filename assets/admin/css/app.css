@@ -2,6 +2,30 @@ body {
     height: 100%
 }
 
+/********* BUTTON ************/
+.login100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 45px;
+    background-color: #086095;
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.2;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+}
+
 /********* SIDEBAR ************/
 .b_side_menu{
     display: flex;
@@ -15,7 +39,10 @@ body {
 .side_menu a {
     color: #086095;
 }
-
+.side_menu .active{
+    background-color: #086095;
+    color: white;
+}
 /*********** DASHBOARD ***********/
 .flex-container {
     display: flex;
@@ -65,4 +92,10 @@ body {
     margin-top: 60px;
     cursor: pointer;
 
+}
+.mt_150{
+    margin-top: 150px;
+}
+.mt_100{
+    margin-top: 150px;
 }

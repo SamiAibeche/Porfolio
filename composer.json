@@ -8,6 +8,7 @@
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "*",
         "symfony/flex": "^1.1",
+        "symfony/form": "^4.1.6",
         "symfony/framework-bundle": "*",
         "symfony/orm-pack": "^1.0",
         "symfony/security": "*",
@@ -15,6 +16,7 @@
         "symfony/security-csrf": "*",
         "symfony/translation": "*",
         "symfony/twig-bundle": "*",
+        "symfony/validator": "*",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*"
     },

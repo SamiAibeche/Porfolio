@@ -15,38 +15,38 @@
             </li>
         </ul>
     </nav>
-
+    {% set current_path = app.request.get('_route') %}
     <div class="container-fluid">
         <div class="row b_side_menu">
             <nav class="col-md-2 d-none d-md-block bg-light sidebar side_menu">
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" href="/admin">
+                            <a class="nav-link {% if(controller_name == 'AdminController') %} active {% endif %}" href="/admin">
                                 <span data-feather="home"></span>
                                 Dashboard <span class="sr-only">(current)</span>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {% if(controller_name == 'AboutController') %} active {% endif %}"  href="#">
                                 <span data-feather="user"></span>
                                 About me
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {% if(controller_name == 'TechnoController') %} active {% endif %}" href="/admin/techno">
                                 <span data-feather="terminal"></span>
                                 Technologies
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link {% if(controller_name == 'ProjectController') %} active {% endif %}" href="/admin/project">
                                 <span data-feather="briefcase"></span>
                                 Cases
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/admin/translations">
+                            <a class="nav-link {% if(controller_name == 'TranslationController') %} active {% endif %}" href="/admin/translations">
                                 <span data-feather="type"></span>
                                 Translations
                             </a>
@@ -54,60 +54,62 @@
                     </ul>
                 </div>
             </nav>
-            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-                <h1 class="display-4" >Welcome to your Admin Manager</h1>
-                <p class="lead">
-                    Here you will be able to manage all the content of your website, please click on a link below to edit his section
-                </p>
-                <div class="flex-container">
-                    <div class="box-dashboard">
-                        <div>
-                            <span data-feather="user"></span>
-                        </div>
-                        <div>
-                            <p>Here you can manage your about section, you will be able to edit the section</p>
-                        </div>
-                        <div class="container-login100-form-btn m-t-17">
-                            <a href="/admin/aboutme"><button class="login100-form-btn" type="submit">About me</button></a>
+           {% block main %}
+               <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+                   <h1 class="display-4" >Welcome to your Admin Manager</h1>
+                   <p class="lead">
+                       Here you will be able to manage all the content of your website, please click on a link below to edit his section
+                   </p>
+                   <div class="flex-container">
+                       <div class="box-dashboard">
+                           <div>
+                               <span data-feather="user"></span>
+                           </div>
+                           <div>
+                               <p>Here you can manage your about section, you will be able to edit the section</p>
+                           </div>
+                           <div class="container-login100-form-btn m-t-17">
+                               <a href="/admin/aboutme"><button class="login100-form-btn" type="submit">About me</button></a>
 
-                        </div>
-                    </div>
-                    <div class="box-dashboard">
-                        <div>
-                            <span data-feather="terminal"></span>
-                        </div>
-                        <div>
-                            <p>Here you can manage your technologies, you will be able to add, edit or remove a learned technology</p>
-                        </div>
-                        <div class="container-login100-form-btn m-t-17">
-                            <a href="/admin/technologies"><button class="login100-form-btn" type="submit">Technologies</button></a>
+                           </div>
+                       </div>
+                       <div class="box-dashboard">
+                           <div>
+                               <span data-feather="terminal"></span>
+                           </div>
+                           <div>
+                               <p>Here you can manage your technologies, you will be able to add, edit or remove a learned technology</p>
+                           </div>
+                           <div class="container-login100-form-btn m-t-17">
+                               <a href="/admin/technologies"><button class="login100-form-btn" type="submit">Technologies</button></a>
 
-                        </div>
-                    </div>
-                    <div class="box-dashboard">
-                        <div>
-                            <span data-feather="briefcase"></span>
-                        </div>
-                        <div>
-                            <p>Here you can manage your projects, you will be able to add, edit or remove a project</p>
-                        </div>
-                        <div class="container-login100-form-btn m-t-17">
-                            <a href="/admin/cases"><button class="login100-form-btn" type="submit">Cases</button></a>
-                        </div>
-                    </div>
-                    <div class="box-dashboard">
-                        <div>
-                            <span data-feather="type"></span>
-                        </div>
-                        <div>
-                            <p>Here you can manage your translations, you will be able to add, edit or remove a translation</p>
-                        </div>
-                        <div class="container-login100-form-btn m-t-17">
-                            <a href="/admin/translations"><button class="login100-form-btn" type="submit">Translations</button></a>
-                        </div>
-                    </div>
-                </div>
-            </main>
+                           </div>
+                       </div>
+                       <div class="box-dashboard">
+                           <div>
+                               <span data-feather="briefcase"></span>
+                           </div>
+                           <div>
+                               <p>Here you can manage your projects, you will be able to add, edit or remove a project</p>
+                           </div>
+                           <div class="container-login100-form-btn m-t-17">
+                               <a href="/admin/cases"><button class="login100-form-btn" type="submit">Cases</button></a>
+                           </div>
+                       </div>
+                       <div class="box-dashboard">
+                           <div>
+                               <span data-feather="type"></span>
+                           </div>
+                           <div>
+                               <p>Here you can manage your translations, you will be able to add, edit or remove a translation</p>
+                           </div>
+                           <div class="container-login100-form-btn m-t-17">
+                               <a href="/admin/translations"><button class="login100-form-btn" type="submit">Translations</button></a>
+                           </div>
+                       </div>
+                   </div>
+               </main>
+           {% endblock %}
         </div>
     </div>
 
