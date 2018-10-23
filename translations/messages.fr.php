@@ -10,6 +10,12 @@ return array(
             'bundles' => 'Symfony a des Bundles',
         ),
     ),
+    'form' => array(
+        'btn' => array(
+            'save'   => 'Sauver',
+            'amazing' => 'Symfony is amazing',
+        )
+    ),
     'user' => array(
         'login' => 'Connexion',
     ),
