@@ -5,6 +5,8 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TechnoRepository")
  */
@@ -19,16 +21,29 @@ class Techno
 
     /**
      * @ORM\Column(type="string", length=125)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 7,
+     *      exactMessage = "The background-color shoud be composed exactly with 7 characters (Example : #FFFFFF)"
+     * )
      */
     private $background;
 
     /**
      * @ORM\Column(type="string", length=12)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 7,
+     *      max = 7,
+     *      exactMessage = "The color shoud be composed exactly with 7 characters (Example : #000000)"
+     * )
      */
     private $color;
 
@@ -52,7 +67,7 @@ class Techno
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 

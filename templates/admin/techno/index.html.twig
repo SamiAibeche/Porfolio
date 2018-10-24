@@ -11,6 +11,20 @@
                 </p>
                 <a href="/admin/techno/add" class="link-btn col-md-2"><span data-feather="plus"></span>Add a Techno</a>
             </div>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="col-md-12">
+                    <div class="mt_30 alert alert-success" role="alert">
+                        <h5>{{ flashMessage }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('deleted') %}
+                <div class="col-md-12">
+                    <div class="mt_30 alert alert-success" role="alert">
+                        <h5>{{ flashMessage }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
             <div class="col-md-12 mt_150">
                 <table id="translationsTable" class="">
                 <thead>
@@ -36,7 +50,7 @@
                         <td>
                             <form style="display: inline" method="POST" action="/admin/techno/delete">
                                 <input type="hidden" name="action" value="">
-                                <input type="hidden" name="techno_id" value="11">
+                                <input type="hidden" name="techno_id" value="{{  techno.id }}">
                                 <button class="btn btn-xs btn-danger"><span data-feather="trash-2"></span></button>
                             </form>
                         </td>

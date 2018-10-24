@@ -10,6 +10,27 @@
                  Here you will be able to add a new technology, please fill the fields below and submit the form
              </p>
          </div>
+         {% if(errors is defined ) %}
+         <div class="col-md-12">
+             <div class="alert alert-danger" role="alert">
+                 <h5>The Techno has the following errors</h5>
+                 <ul>
+                     {% for error in errors %}
+                         <li>{{ error.propertyPath|capitalize }} : {{ error.message }}</li>
+                     {% endfor %}
+                 </ul>
+             </div>
+         </div>
+         {% endif %}
+
+         {% for flashMessage in app.session.flashbag.get('success') %}
+         <div class="col-md-12">
+             <div class="mt_30 alert alert-success" role="alert">
+                 <h5>{{ flashMessage }}</h5>
+             </div>
+         </div>
+         {% endfor %}
+
          <div class="col-md-9 mt_150">
              {{ form_start(form,  {'attr': {'class': 'techno_form', 'id' : 'addTechnoForm'} } ) }}
              <div class="form-group">
