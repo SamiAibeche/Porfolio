@@ -5,15 +5,15 @@
 <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
      <div class="row">
          <div class="col-md-9">
-             <h1 class="display-4" >Welcome to your Technology Manager</h1>
+             <h1 class="display-4" >Welcome to your Projet Manager</h1>
              <p class="lead">
-                 Here you will be able to add a new technology, please fill the fields below and submit the form
+                 Here you will be able to add a new projet, please fill the fields below and submit the form
              </p>
          </div>
          {% if(errors is defined ) %}
          <div class="col-md-12">
              <div class="alert alert-danger" role="alert">
-                 <h5>The Techno has the following errors</h5>
+                 <h5>The Project has the following errors</h5>
                  <ul>
                      {% for error in errors %}
                          <li>{{ error.propertyPath|capitalize }} : {{ error.message }}</li>
@@ -32,25 +32,59 @@
          {% endfor %}
 
          <div class="col-md-9 mt_150">
-             {{ form_start(form,  {'attr': {'class': 'techno_form', 'id' : 'addTechnoForm'} } ) }}
-             <div class="form-group">
-                 <label for="techno_name">Techno Name</label>
-                 {{ form_widget(form.name, {'attr': {'class': 'form-control','placeholder':'Example : PHP'} })  }}
+             {{ form_start(form,  {'attr': {'class': 'techno_form', 'id' : 'addProjectForm'} } ) }}
+             <div class="row form-group">
+
+                 <div class="col-md-4">
+                     <label for="project_name">Project Name</label>
+                     {{ form_widget(form.name, {'attr': {'class': 'form-control','placeholder':'Example : Porsche Experience'} })  }}
+                 </div>
+
+                 <div class="col-md-4">
+                     <label for="project_client">Client Name</label>
+                     {{ form_widget(form.client, {'attr': {'class': 'form-control','placeholder':'Example : Porsche'} })  }}
+                 </div>
+
+                 <div class="col-md-4">
+                     <label for="project_company">Company</label>
+                     {{ form_widget(form.company, {'attr': {'class': 'form-control','placeholder':'Example : MV Studio'} })  }}
+                 </div>
              </div>
+
              <div class="form-group">
-                 <label for="techno_background">Techno Background Color</label>
-                 {{ form_widget(form.background, {'attr': {'class': 'form-control','placeholder':'Example : #000000'} })  }}
+                 <label for="project_description">Project Description</label>
+                 {{ form_widget(form.description, {'attr': {'class': 'form-control','placeholder':'Example : The project has been created for creating ...'} })  }}
              </div>
+
+             <div class="form-group custom-file">
+                 {{ form_widget(form.image, {'attr': {'class': 'custom-file-input form-control','id':'customFile'} })  }}
+                 <label for="project_image" class="custom-file-label">Image of your project</label>
+             </div>
+
              <div class="form-group">
-                 <label for="techno_color">Techno Color</label>
-                 {{ form_widget(form.color, {'attr': {'class': 'form-control','placeholder':'Example : #FFFFFF'} })  }}
+                 <label for="project_technos">Technologies used</label>
+                 {{ form_widget(form.technos, {'attr': {'class': 'form-control custom-select','placeholder':'', 'size':'3'} })  }}
              </div>
+
+             <div class="form-group input-append date form_datetime">
+                 <label for="project_createdAt">Creation date of the Project</label>
+                 {{ form_widget(form.createdAt, {'attr': {'class': 'form-control','placeholder':'', 'size':'16'} })  }}
+             </div>
+
              <div class="form-group">
                  {{ form_widget(form.save, {'attr' : {'class': 'login100-form-btn col-md-2 mt_100'}} )  }}
              </div>
+
 
              {{ form_end(form) }}
          </div>
      </div>
 </main>
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii"
+        });
+    </script>
 {% endblock %}
