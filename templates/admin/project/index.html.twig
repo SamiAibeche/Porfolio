@@ -31,8 +31,8 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Description</th>
                         <th>Image</th>
+                        <th>Description</th>
                         <th>Client</th>
                         <th>Company</th>
                         <th>Created At</th>
@@ -45,10 +45,11 @@
                         <tr>
                             <td>{{  project.id }}</td>
                             <td>{{  project.name }}</td>
-                            <td>{{  project.image }}</td>
+                            <td><img src="{{ asset('uploads/projects/' ~ project.image) }}" alt="{{  project.name }}" style="width: 50px"></td>
+                            <td>{{  project.description }}</td>
                             <td>{{  project.client }}</td>
                             <td>{{  project.company }}</td>
-                            <td>{{  project.createdAt }}</td>
+                            <td>{{  project.createdAt|date('Y-m-d') }}</td>
                             <td style="display: flex" >
                                 <a style="color:white" class="btn btn-xs btn-warning" href="/admin/project/edit/{{  project.id }}"><span data-feather="edit-2"></span></a></td>
                             </td>

@@ -13,7 +13,11 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+
 use App\Form\ProjectType;
+
 
 class ProjectController extends AbstractController
 {
@@ -51,6 +55,26 @@ class ProjectController extends AbstractController
             }
 
             if($form->isValid()) {
+
+
+                // Get Posted Image datas
+                $file = $form->get('image')->getData();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $file->move(
+                        $this->getParameter('projects_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // instead of its contents
+                $project->setImage($fileName);
+
+
                 // get data in form
                 $this->getDoctrine()->getManager()->persist($project);
                 $this->getDoctrine()->getManager()->flush();
