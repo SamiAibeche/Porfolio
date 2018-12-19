@@ -107,11 +107,6 @@ class ProjectController extends AbstractController
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
-       //$postedDate = new Date(strtotime($form->get("createdAt")->getViewData()));
-        //$project->setCreatedAt($project);
-        //dump($postedDate);
-        //die();
-
         if($form->isSubmitted()) {
 
 
@@ -172,6 +167,32 @@ class ProjectController extends AbstractController
             'controller_name' => 'ProjectController',
             'image'          => $project->getImage()
         ]);
+    }
+
+    /**
+     * @Route("/admin/project/delete", name="admin_project_delete")
+     */
+    public function delete(Request $request)
+    {
+
+        $id = $request->request->get("project_id");
+        $repo = $this->getDoctrine()->getRepository(Project::class);
+        $project = $repo->find($id);
+
+        //Remove previous file
+        $oldImagePath = $this->getParameter('projects_directory') . "/" . $project->getImage();
+        if (file_exists($oldImagePath)) {
+            @unlink($oldImagePath);
+        }
+
+        // get data in form
+        $this->getDoctrine()->getManager()->persist($project);
+        $this->getDoctrine()->getManager()->remove($project);
+        $this->getDoctrine()->getManager()->flush();
+        $this->get('session')->getFlashBag()->set('deleted', 'The Project has been successfully deleted');
+
+        return $this->redirectToRoute("admin_project");
+
     }
 
 }
