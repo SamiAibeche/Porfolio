@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
+
 
 use App\Form\ProjectType;
 
@@ -56,23 +58,27 @@ class ProjectController extends AbstractController
 
             if($form->isValid()) {
 
+                if($form->get('image')->getData() !== true) {
 
-                // Get Posted Image datas
-                $file = $form->get('image')->getData();
-                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                    if (!is_null($form->get('image')->getData())) {
+                        // Get Posted Image datas
+                        $file = $form->get('image')->getData();
+                        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
-                // Move the file to the directory where brochures are stored
-                try {
-                    $file->move(
-                        $this->getParameter('projects_directory'),
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
+                        // Move the file to the directory where brochures are stored
+                        try {
+                            $file->move(
+                                $this->getParameter('projects_directory'),
+                                $fileName
+                            );
+                        } catch (FileException $e) {
+                            // ... handle exception if something happens during file upload
+                        }
+
+                        // instead of its contents
+                        $project->setImage($fileName);
+                    }
                 }
-
-                // instead of its contents
-                $project->setImage($fileName);
 
 
                 // get data in form
@@ -87,6 +93,81 @@ class ProjectController extends AbstractController
         return $this->render('admin/project/add.html.twig', [
             'form'              => $form->createView(),
             'controller_name'   => 'ProjectController'
+        ]);
+    }
+
+    /**
+     * @Route("/admin/project/edit/{id}", name="admin_project_edit")
+     */
+    public function edit(Request $request, ValidatorInterface $validator, $id)
+    {
+        $repo = $this->getDoctrine()->getRepository(Project::class);
+        $project = $repo->find($id);
+        $olderFile = $project->getImage();
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+
+
+        if($form->isSubmitted()) {
+
+
+            $errors = $validator->validate($project);
+            if (count($errors) > 0) {
+                return $this->render('admin/project/add.html.twig', [
+                    'form'              => $form->createView(),
+                    'controller_name' => 'ProjectController',
+                    'errors' => $errors
+                ]);
+            }
+
+            if($form->isValid()){
+                if($form->get('image')->getData() !== true) {
+                    //Remove previous file
+                    $oldImagePath = $this->getParameter('projects_directory') . "/" . $olderFile;
+                    if (file_exists($oldImagePath)) {
+                        @unlink($oldImagePath);
+                    }
+
+                    // Get Posted Image datas
+                    $file = $form->get('image')->getData();
+                    $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+                    // Move the file to the directory where brochures are stored
+                    try {
+                        $file->move(
+                            $this->getParameter('projects_directory'),
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        // ... handle exception if something happens during file upload
+                    }
+
+                    // instead of its contents
+                    $project->setImage($fileName);
+                } else {
+                    $project->setImage($olderFile);
+                }
+
+
+                // get data in form
+                $this->getDoctrine()->getManager()->persist($project);
+                $this->getDoctrine()->getManager()->flush();
+                $this->get('session')->getFlashBag()->set('success', 'The Project has been successfully updated');
+                return $this->render('admin/project/add.html.twig', [
+                    'form'            => $form->createView(),
+                    'controller_name' => 'ProjectController',
+                    'image'           => $project->getImage()
+                ]);
+            }
+        }
+
+
+
+
+        return $this->render('admin/project/add.html.twig', [
+            'form'            => $form->createView(),
+            'controller_name' => 'ProjectController',
+            'image'          => $project->getImage()
         ]);
     }
 

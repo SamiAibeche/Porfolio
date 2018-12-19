@@ -61,6 +61,10 @@
                  <label for="project_image" class="custom-file-label">Image of your project</label>
              </div>
 
+             {% if image is defined %}
+                 <p>qsdqsdds</p>
+             {% endif %}
+
              <div class="form-group">
                  <label for="project_technos">Technologies used</label>
                  {{ form_widget(form.technos, {'attr': {'class': 'form-control custom-select','placeholder':'', 'size':'3'} })  }}
@@ -68,7 +72,7 @@
 
              <div class="form-group input-append date form_datetime">
                  <label for="project_createdAt">Creation date of the Project</label>
-                 {{ form_widget(form.createdAt, {'attr': {'class': 'form-control','placeholder':'', 'size':'16'} })  }}
+                 {{ form_widget(form.createdAt, {'attr': {'class': 'form-control js-datepicker','placeholder':'', 'size':'16'} })  }}
              </div>
 
              <div class="form-group">
@@ -81,10 +85,10 @@
      </div>
 </main>
 {% endblock %}
-{% block javascripts %}
+{% block custom_js %}
     <script type="text/javascript">
-        $(".form_datetime").datetimepicker({
-            format: "dd MM yyyy - hh:ii"
-        });
+        /*$(".js-datepicker").datepicker({
+            format: "dd/MM/yyyy"
+        });*/
     </script>
 {% endblock %}

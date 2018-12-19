@@ -32,8 +32,9 @@ class ProjectType extends AbstractType
             ->add('description', TextareaType::class)
             ->add('client', TextType::class)
             ->add('company', TextType::class)
-            ->add('image', FileType::class)
-            ->add('createdAt', DateTimeType::class)
+            ->add('image', FileType::class, array('data_class' => null, 'required' => false, "empty_data"=>true))
+            //->add('createdAt', DateTimeType::class, array('widget' => 'single_text', 'html5' => false, 'attr' => ['class' => 'js-datepicker']))
+            ->add('createdAt', DateTimeType::class, array('required' => false, 'attr' => ['class' => 'js-datepicker']))
             ->add('technos', EntityType::class, ["class" => Techno::class, "multiple"=>true])
             ->add('save', SubmitType::class)
         ;
