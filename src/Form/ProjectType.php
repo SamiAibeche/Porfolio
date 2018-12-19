@@ -11,7 +11,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -33,8 +33,8 @@ class ProjectType extends AbstractType
             ->add('client', TextType::class)
             ->add('company', TextType::class)
             ->add('image', FileType::class, array('data_class' => null, 'required' => false, "empty_data"=>true))
-            //->add('createdAt', DateTimeType::class, array('widget' => 'single_text', 'html5' => false, 'attr' => ['class' => 'js-datepicker']))
-            ->add('createdAt', DateTimeType::class, array('required' => false, 'attr' => ['class' => 'js-datepicker']))
+            ->add('createdAt', DateType::class, array('widget' => 'single_text', 'html5' => false))
+            //->add('createdAt', DateTimeType::class, array('required' => false, 'attr' => ['class' => 'js-datepicker']))
             ->add('technos', EntityType::class, ["class" => Techno::class, "multiple"=>true])
             ->add('save', SubmitType::class)
         ;

@@ -45,7 +45,7 @@ class Project
     private $company;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $created_at;
 

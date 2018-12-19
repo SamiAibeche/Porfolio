@@ -107,6 +107,10 @@ class ProjectController extends AbstractController
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
+       //$postedDate = new Date(strtotime($form->get("createdAt")->getViewData()));
+        //$project->setCreatedAt($project);
+        //dump($postedDate);
+        //die();
 
         if($form->isSubmitted()) {
 
@@ -147,7 +151,6 @@ class ProjectController extends AbstractController
                 } else {
                     $project->setImage($olderFile);
                 }
-
 
                 // get data in form
                 $this->getDoctrine()->getManager()->persist($project);

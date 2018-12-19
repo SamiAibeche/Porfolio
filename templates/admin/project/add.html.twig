@@ -87,8 +87,14 @@
 {% endblock %}
 {% block custom_js %}
     <script type="text/javascript">
-        /*$(".js-datepicker").datepicker({
-            format: "dd/MM/yyyy"
-        });*/
+        $(".js-datepicker").datepicker({
+            format: "yyyy-MM-dd"
+        });
+        $('.js-datepicker').on("change", function () {
+            var fromdate = $(this).val();
+            var date = fromdate.split("/");
+            var date_str = date[2]+"-"+(date[0])+"-"+date[1];
+            $(this).val(date_str);
+        });
     </script>
 {% endblock %}
