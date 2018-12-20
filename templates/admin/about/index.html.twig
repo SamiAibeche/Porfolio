@@ -1,0 +1,76 @@
+{% extends 'admin/default/index.html.twig' %}
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block main %}
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="row">
+            <div class="col-md-9">
+                <h1 class="display-4" >Welcome to your About Manager</h1>
+                <p class="lead">
+                    Here you will be able to edit your "About" Section
+                </p>
+            </div>
+            {% if(errors is defined ) %}
+                <div class="col-md-12">
+                    <div class="alert alert-danger" role="alert">
+                        <h5>The section has the following errors</h5>
+                        <ul>
+                            {% for error in errors %}
+                                <li>{{ error.propertyPath|capitalize }} : {{ error.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="col-md-12">
+                    <div class="mt_30 alert alert-success" role="alert">
+                        <h5>{{ flashMessage }}</h5>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="col-md-9 mt_100">
+                {{ form_start(form,  {'attr': {'class': 'about_form', 'id' : 'addAboutForm'} } ) }}
+                <div class="row form-group">
+
+                    <div class="col-md-9">
+                        <label for="project_name">Title</label>
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control','placeholder':'Example : About me'} })  }}
+                    </div>
+
+                </div>
+
+                <div class="row form-group">
+
+                    <div class="col-md-9">
+                        <label for="project_name">Description</label>
+                        {{ form_widget(form.bio, {'attr': {'class': 'form-control ckeditor'} })  }}
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    {{ form_widget(form.save, {'attr' : {'class': 'login100-form-btn col-md-2 mt_100'}} )  }}
+                </div>
+
+
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}
+{% block custom_js %}
+    <script src="{{ asset('/libs/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/libs/ckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('textarea.ckeditor').ckeditor();
+        });
+    </script>
+
+
+
+{% endblock %}
