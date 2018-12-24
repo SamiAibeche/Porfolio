@@ -19,7 +19,6 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-server-bundle": "*",
-        "symfony/webpack-encore-bundle": "^1.0",
         "symfony/webpack-encore-pack": "^1.0",
         "symfony/yaml": "*"
     },
