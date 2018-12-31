@@ -32,7 +32,7 @@
          {% endfor %}
 
          <div class="col-md-9 mt_150">
-             {{ form_start(form,  {'attr': {'class': 'project_form', 'id' : 'addProjectForm'} } ) }}
+             {{ form_start(form,  {'attr': {'class': 'project_form', 'id' : 'addProjectForm', 'novalidate': 'novalidate'} } ) }}
              <div class="row form-group">
 
                  <div class="col-md-4">
@@ -52,6 +52,11 @@
              </div>
 
              <div class="form-group">
+                 <label for="project_link">URL of the project</label>
+                 {{ form_widget(form.link, {'attr': {'class': 'form-control','placeholder':'https://yoursite.com/'} })  }}
+             </div>
+
+             <div class="form-group">
                  <label for="project_description">Project Description</label>
                  {{ form_widget(form.description, {'attr': {'class': 'form-control','placeholder':'Example : The project has been created for creating ...'} })  }}
              </div>
@@ -62,7 +67,7 @@
              </div>
 
              {% if image is defined %}
-                 <p>qsdqsdds</p>
+                 <p>Show Image here ! </p>
              {% endif %}
 
              <div class="form-group">

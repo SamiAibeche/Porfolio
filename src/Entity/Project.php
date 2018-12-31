@@ -25,6 +25,11 @@ class Project
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=128)
+     */
+    private $link;
+
+    /**
      * @ORM\Column(type="text")
      */
     private $description;
@@ -161,4 +166,21 @@ class Project
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLink()
+    {
+        return $this->link;
+    }
+
+    /**
+     * @param mixed $link
+     */
+    public function setLink($link): void
+    {
+        $this->link = $link;
+    }
+
 }

@@ -30,6 +30,7 @@ class ProjectType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
+            ->add('link', TextType::class)
             ->add('client', TextType::class)
             ->add('company', TextType::class)
             ->add('image', FileType::class, array('data_class' => null, 'required' => false, "empty_data"=>true))
