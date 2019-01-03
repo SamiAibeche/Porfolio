@@ -7,23 +7,23 @@
     <nav id="myNav" class="navbar navbar-dark bg-dark">
         <button id="burger" class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
-                <i class="fa fa-navicon"></i>
+                <i class="fas fa-bars"></i>
             </span>
         </button>
 
         <div class="navbar-collapse collapse" id="navbarsExample01" style="">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Intro <span class="sr-only">(current)</span></a>
+                    <a class="nav-link link_nav" href="#intro">Intro <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cases</a>
+                    <a class="nav-link link_nav" href="#about">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
+                    <a class="nav-link link_nav" href="#cases">Cases</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link link_nav" href="#contact">Contact</a>
                 </li>
             </ul>
         </div>
@@ -48,30 +48,103 @@
     </section>
     <!-- Project Section-->
     <section id="cases" >
-        <h4>Cases</h4>
-        {% for project in projects %}
-            <div>
-                <p><img style="width: 250px;" src="{{ asset('/uploads/projects/' ~ project.image) }}" alt="{{ project.name }}"></p>
-                <p>{{ project.name }}</p>
-                <p>{{ project.description }}</p>
-                <p>{{ project.link }}</p>
-                <p>For : {{ project.client }}</p>
-                <p>Where : {{ project.company }}</p>
-                <p>On : {{ project.createdAt | date("d/m/Y")  }}</p>
-                <div>
-                    Technos :
-                    <p>
-                        {% for techno in project.technos %}
-                            <span style="color: {{ techno.color }}; background-color: {{ techno.background }}" > {{ techno.name }}</span>
+        <div class="container cases_block">
+            <div class="text-center case_title">
+                <h4>Cases</h4>
+            </div>
+            <div class="row rs_block">
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+                    <div class="carousel-inner">
+                        {% for project in projects %}
+                            <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <a href="{{ project.link }}" target="_blank"><img class="img-thumbnail case_img" src="{{ asset('/uploads/projects/' ~ project.image) }}" alt="{{ project.name }}"></a>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="cases_datas">
+                                            <p class="case_name">{{ project.name }}</p>
+                                            <p class="case_description">{{ project.description }}</p>
+                                            <p class="case_link"><i class="fas fa-link"></i> &nbsp; <a href="{{ project.link }}" target="_blank">{{ project.link }}</a></p>
+
+                                            <p class="case_client"><i class="fas fa-users"></i> &nbsp; For : {{ project.client }}</p>
+
+                                            <p><i class="far fa-building"></i> &nbsp; {{ project.company }}</p>
+                                            <p><i class="far fa-calendar-alt"></i> &nbsp; {{ project.createdAt | date("d/m/Y")  }}</p>
+                                            <div class="cases_technos">
+                                                <p>
+                                                    {% for techno in project.technos %}
+                                                        <span style="color: {{ techno.color }}; background-color: {{ techno.background }}" >{{ techno.name }} </span>
+                                                    {% endfor %}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
-                    </p>
+                    </div>
+                    <div class="arrow_navigation">
+                        <div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        {% endfor %}
+            <!--
+            <div class="nav_arrows">
+                <a class="prev"><i class="fa fa-angle-left"></i></a>
+                <span class="space_between">&nbsp;</span>
+                <a class="next"><i class="fa fa-angle-right"></i></a>
+            </div>
+            -->
+        </div>
     </section>
     <!-- Contact / Footer Section-->
     <section id="contact">
-        <h4>Contact</h4>
-    </section
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_start(form,  {'attr': {'class': 'default_form', 'id' : 'defaultContactForm'} } ) }}
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="project_name">Fullname</label>
+                            {{ form_widget(form.fullname, {'attr': {'class': 'form-control','placeholder':'Example : Denzel Washington'} })  }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="project_client">Your email</label>
+                            {{ form_widget(form.email, {'attr': {'class': 'form-control','placeholder':'Example : info@denzel.com'} })  }}
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label for="project_company">Your message</label>
+                            {{ form_widget(form.content, {'attr': {'class': 'form-control','placeholder':'What do you want to say ?'} })  }}
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            {{ form_widget(form.save, {'attr' : {'class': 'btn btn-dark', 'label': 'Click me' }} )  }}
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="col-md-6">
+                    <div class="text-center">
+                        <h4>Find me</h4>
+                    </div>
+                    <div class="social_links">
+                        <div> <a href="https://www.linkedin.com/in/sami-aibeche/" target="_blank"><i class="fab fa-linkedin-in"></i> &nbsp; https://www.linkedin.com/in/sami-aibeche/</a> </div>
+                        <div> <a href="https://github.com/SamiAibeche" target="_blank"><i class="fab fa-github"></i> &nbsp; https://github.com/SamiAibeche </a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}

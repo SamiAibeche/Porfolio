@@ -133,7 +133,6 @@ class ProjectController extends AbstractController
             }
             //If not, store the data
             if($form->isValid()){
-
                 //Save file if it has been posted
                 if($form->get('image')->getData() !== true) {
 

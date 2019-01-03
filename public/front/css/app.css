@@ -445,11 +445,11 @@ iframe {
     width: 100%;
     z-index: 9999999;
 }
-.fa.fa-navicon {
+.fa-bars{
     color:black;
     margin-top: 5px;
 }
-.fa.fa-close {
+.fa-times {
     color:black;
     margin-top: 5px;
 }
@@ -485,7 +485,7 @@ iframe {
 /*---------- ABOUT ---------------*/
 
 #about {
-    height: 100vh;
+    min-height: 700px;
 }
 .about_title{
     margin-bottom: 2em;
@@ -497,8 +497,110 @@ iframe {
     font-size: 16px;
 }
 
+/*---------- CASES ---------------*/
+.arrow_navigation{
+    position: relative;
+}
+.arrow_navigation div{
+    position: absolute;
+    left: 50%;
+    top: 10%;
+}
+.carousel-control-prev-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-next-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+}
+
+.carousel-control-prev,
+.carousel-control-next{
+    display: initial;
+    position: initial;
+}
+
+#cases {
+    min-height: 700px;
+}
+
+.case_title {
+    margin-bottom: 4em;
+}
+.case_img{
+    -webkit-filter: grayscale(75%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(75%);
+    transition: 1s;
+}
+
+.case_img:hover{
+    -webkit-filter: none; /* Safari 6.0 - 9.0 */
+    filter: none;
+}
+.cases_datas{
+    margin-top: 20px;
+    padding-left: 60px;
+    margin-bottom: 40px;
+}
+.cases_datas p{
+    margin-bottom: 4px;
+}
+.cases_technos{
+    margin-top: 20px;
+}
+.case_name{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.case_description{
+    margin-bottom: 20px !important;
+}
+.case_client{
+    margin-bottom: 20px !important;
+}
+.case_link:hover a{
+    color: lightgrey;
+}
+.nav_arrows{
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+}
+.nav_arrows a {
+    font-size: 2.5em;
+}
+.space_between{
+
+}
+/*---------- CONTACT ---------------*/
+
+#contact {
+    margin-top: 100px;
+    height: 50vh;
+}
+.social_links{
+    margin-top: 40px;
+    padding-left: 60px;
+    border-left: 1px solid;
+    margin-bottom: 40px;
+}
+.social_links a{
+    font-size: 15px;
+}
+
+.social_links a:hover {
+    color: lightgrey;
+}
+
 @media (max-width: 576px) {
+     #about{
+         min-height: 600px;
+     }
     .about_title {
         margin-top: 2em;
+    }
+    #cases {
+        margin-top: 100px;
+        min-height: 600px;
     }
 }
